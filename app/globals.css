@@ -1,0 +1,445 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 173 80% 40%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 173 80% 94%;
+    --accent-foreground: 173 80% 30%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 173 80% 40%;
+    --radius: 0.5rem;
+    --chart-1: 173 80% 40%;
+    --chart-2: 199 89% 48%;
+    --chart-3: 262 83% 58%;
+    --chart-4: 291 64% 42%;
+    --chart-5: 327 73% 52%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 173 80% 40%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 173 80% 30%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 173 80% 60%;
+    --chart-1: 173 80% 60%;
+    --chart-2: 199 89% 68%;
+    --chart-3: 262 83% 78%;
+    --chart-4: 291 64% 62%;
+    --chart-5: 327 73% 72%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    scroll-behavior: smooth;
+    cursor: auto; /* Ensure default cursor */
+  }
+}
+
+@layer utilities {
+  /* Custom animations */
+  @keyframes gradient-x {
+    0%,
+    100% {
+      background-size: 200% 200%;
+      background-position: left center;
+    }
+    50% {
+      background-size: 200% 200%;
+      background-position: right center;
+    }
+  }
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  @keyframes pulse-glow {
+    0%,
+    100% {
+      box-shadow: 0 0 20px rgba(20, 184, 166, 0.3);
+    }
+    50% {
+      box-shadow: 0 0 40px rgba(20, 184, 166, 0.6);
+    }
+  }
+
+  .animate-gradient-x {
+    animation: gradient-x 8s ease infinite;
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 3s ease-in-out infinite;
+  }
+
+  /* Duration classes for dynamic animations */
+  .duration-800 {
+    transition-duration: 800ms;
+  }
+
+  .duration-1000 {
+    transition-duration: 1000ms;
+  }
+
+  .duration-1200 {
+    transition-duration: 1200ms;
+  }
+
+  /* Grid auto-rows for equal height cards */
+  .auto-rows-fr {
+    grid-auto-rows: 1fr;
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(45deg, #14b8a6, #6366f1);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(45deg, #0d9488, #4f46e5);
+  }
+
+  /* Performance optimizations */
+  .will-change-transform {
+    will-change: transform;
+  }
+
+  .will-change-opacity {
+    will-change: opacity;
+  }
+
+  /* Reduce motion for accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  /* Glass morphism effects */
+  .glass {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .glass-dark {
+    background: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* Standard cursor behavior - ensure default cursors work properly */
+  button,
+  [role="button"],
+  input[type="submit"],
+  input[type="button"],
+  input[type="reset"] {
+    cursor: pointer;
+  }
+
+  a,
+  a:hover {
+    cursor: pointer;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="search"],
+  input[type="url"],
+  input[type="tel"],
+  input[type="number"],
+  textarea {
+    cursor: text;
+  }
+
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  input[type="password"]:focus,
+  input[type="search"]:focus,
+  input[type="url"]:focus,
+  input[type="tel"]:focus,
+  input[type="number"]:focus,
+  textarea:focus {
+    cursor: text;
+  }
+
+  select {
+    cursor: pointer;
+  }
+
+  input[type="checkbox"],
+  input[type="radio"] {
+    cursor: pointer;
+  }
+
+  input[type="range"] {
+    cursor: pointer;
+  }
+
+  input[type="file"] {
+    cursor: pointer;
+  }
+
+  [disabled],
+  [disabled]:hover {
+    cursor: not-allowed;
+  }
+
+  .cursor-pointer {
+    cursor: pointer;
+  }
+
+  .cursor-text {
+    cursor: text;
+  }
+
+  .cursor-grab {
+    cursor: grab;
+  }
+
+  .cursor-grabbing {
+    cursor: grabbing;
+  }
+
+  .cursor-not-allowed {
+    cursor: not-allowed;
+  }
+
+  .cursor-wait {
+    cursor: wait;
+  }
+
+  .cursor-help {
+    cursor: help;
+  }
+
+  .cursor-move {
+    cursor: move;
+  }
+
+  .cursor-crosshair {
+    cursor: crosshair;
+  }
+
+  .cursor-default {
+    cursor: default;
+  }
+
+  .cursor-auto {
+    cursor: auto;
+  }
+
+  /* Enhanced hover states for better user experience */
+  button,
+  a,
+  input,
+  textarea,
+  [role="button"],
+  .cursor-pointer {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  button:hover,
+  a:hover,
+  [role="button"]:hover,
+  .cursor-pointer:hover {
+    transform: translateY(-1px);
+  }
+
+  /* Enhanced hover states for better interaction feedback */
+  .hover-lift {
+    transition: transform 0.2s ease;
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-2px);
+  }
+
+  .hover-glow {
+    transition: box-shadow 0.3s ease;
+  }
+
+  .hover-glow:hover {
+    box-shadow: 0 10px 25px rgba(20, 184, 166, 0.15);
+  }
+
+  /* Responsive image containers */
+  @media (max-width: 640px) {
+    .project-image-container {
+      height: 200px;
+    }
+  }
+
+  @media (min-width: 641px) and (max-width: 768px) {
+    .project-image-container {
+      height: 220px;
+    }
+  }
+
+  @media (min-width: 769px) and (max-width: 1024px) {
+    .project-image-container {
+      height: 240px;
+    }
+  }
+
+  @media (min-width: 1025px) {
+    .project-image-container {
+      height: 260px;
+    }
+  }
+
+  /* PDF Viewer Optimizations */
+  iframe[title*="Resume"] {
+    background: white;
+    border-radius: 0;
+  }
+
+  /* Modal and Dialog Improvements */
+  .dialog-overlay {
+    backdrop-filter: blur(8px);
+  }
+
+  /* Responsive PDF viewer */
+  @media (max-width: 768px) {
+    .pdf-viewer-mobile {
+      height: 70vh !important;
+    }
+  }
+
+  /* Print styles for resume */
+  @media print {
+    .resume-modal,
+    .navigation-header {
+      display: none !important;
+    }
+  }
+
+  /* Accessibility improvements */
+  @media (prefers-reduced-motion: reduce) {
+    .resume-modal * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    .resume-modal {
+      border: 2px solid;
+    }
+  }
+
+  /* Touch device optimizations */
+  @media (hover: none) and (pointer: coarse) {
+    .hover-lift:hover {
+      transform: none;
+    }
+
+    .hover-glow:hover {
+      box-shadow: none;
+    }
+  }
+
+  /* Ensure proper cursor behavior on all interactive elements */
+  summary {
+    cursor: pointer;
+  }
+
+  details > summary {
+    cursor: pointer;
+  }
+
+  [tabindex]:not([tabindex="-1"]) {
+    cursor: pointer;
+  }
+
+  /* Ensure form elements have proper cursor behavior */
+  label {
+    cursor: default;
+  }
+
+  label[for] {
+    cursor: pointer;
+  }
+
+  /* Ensure proper cursor for loading states */
+  .loading,
+  [aria-busy="true"] {
+    cursor: wait;
+  }
+
+  /* Ensure proper cursor for draggable elements */
+  [draggable="true"] {
+    cursor: grab;
+  }
+
+  [draggable="true"]:active {
+    cursor: grabbing;
+  }
+}
