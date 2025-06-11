@@ -32,6 +32,41 @@ const projects = [
 
 export default function ProjectsSection() {
   return (
+<<<<<<< HEAD
+    <SmoothScrollSection id="projects" animationType="slideUp" className="py-20 md:py-28 lg:py-36">
+      <div className="container px-4 md:px-6">
+        <SmoothScrollSection animationType="blur" delay={100}>
+          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl mb-20 text-center bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-300 bg-clip-text text-transparent">
+            Projects
+          </h2>
+        </SmoothScrollSection>
+
+        {/* Responsive grid with consistent spacing */}
+        <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 auto-rows-fr">
+          {projects.map((project, index) => (
+            <SmoothScrollSection key={project.title} animationType="scale" delay={200 + index * 200} className="h-full">
+              <ProjectCard
+                title={project.title}
+                description={project.description}
+                image={project.image}
+                link={project.link}
+                tags={project.tags}
+              />
+            </SmoothScrollSection>
+          ))}
+        </div>
+
+        {/* Optional: Add a "View All Projects" button */}
+        <SmoothScrollSection animationType="fadeIn" delay={800} className="mt-16 text-center">
+          <div className="inline-flex items-center justify-center">
+            <span className="text-sm text-gray-500 dark:text-gray-400 bg-gray-50/50 dark:bg-gray-800/50 px-4 py-2 rounded-full backdrop-blur-sm border border-gray-200/30 dark:border-gray-700/30">
+              More projects coming soon...
+            </span>
+          </div>
+        </SmoothScrollSection>
+      </div>
+    </SmoothScrollSection>
+=======
     <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 auto-rows-fr">
       {projects.map((project, index) => (
         <SmoothScrollSection key={project.title} animationType="scale" delay={200 + index * 200} className="h-full">
@@ -54,5 +89,6 @@ export default function ProjectsSection() {
         </div>
       </SmoothScrollSection>
     </div>
+>>>>>>> f85d32de63cf560b3a18dcf7cd069e6b9af11838
   )
 }
