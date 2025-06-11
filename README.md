@@ -1,28 +1,41 @@
-# Personal Portfolio Website
+# Portfolio
 
-A modern, responsive personal portfolio website built with Next.js, TypeScript, and Tailwind CSS.
+A modern, responsive portfolio website built with Next.js, TypeScript, and Tailwind CSS.
 
-## 🚀 Features
+![alt text](Portfolio.png)
 
-- Modern and clean design
-- Responsive layout for all devices
-- TypeScript for type safety
-- Optimized performance with Next.js
-- Custom components and hooks
-- Tailwind CSS for styling
 
-## 🛠️ Tech Stack
 
-- Next.js 14+ (React Framework)
+## Features
+
+- 🌓 Dark/Light mode support
+- 📱 Fully responsive design
+- ⚡ Fast page loads and optimized performance
+- 🎯 SEO optimized
+- 📄 Interactive resume viewer
+- 🎨 Modern UI with Tailwind CSS
+- 🚀 Smooth animations and transitions
+
+## Tech Stack
+
+- Next.js
 - TypeScript
 - Tailwind CSS
-- PostCSS
+- React
+- Node.js
 
-## 📦 Installation
+## Getting Started
+
+### Prerequisites
+
+- Node.js (v18 or higher)
+- pnpm (recommended) or npm
+
+### Installation
 
 1. Clone the repository
 ```bash
-git clone 
+git clone https://github.com/yourusername/portfolio.git
 cd portfolio
 ```
 
@@ -31,40 +44,28 @@ cd portfolio
 pnpm install
 ```
 
-3. Start the development server
+3. Run the development server
 ```bash
 pnpm dev
 ```
 
-The application will be available at `http://localhost:3000`
+Open [http://localhost:3000](http://localhost:3000) to view the website.
 
-## 📁 Project Structure
+### Building for Production
 
-```
-portfolio/
-├── app/              # Next.js App Router pages and layouts
-├── components/       # Reusable React components
-├── hooks/           # Custom React hooks
-├── lib/             # Utility functions and shared logic
-├── public/          # Static assets
-├── styles/          # Global styles
-└── types/           # TypeScript type definitions
+```bash
+pnpm build
 ```
 
-## 📝 License
+## Project Structure
+
+- `/app` - Next.js app router pages and components
+- `/components` - Reusable UI components
+- `/hooks` - Custom React hooks
+- `/lib` - Utility functions and helpers
+- `/public` - Static assets
+- `/styles` - Global styles and Tailwind configurations
+
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## 🙏 Acknowledgments
-
-- Thanks to the Next.js team for their amazing framework
-- Thanks to the Tailwind CSS team for their excellent styling solution
-- Thanks to all contributors
