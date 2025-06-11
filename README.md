@@ -2,6 +2,9 @@
 
 A modern, responsive personal portfolio website built with Next.js, TypeScript, and Tailwind CSS.
 
+![alt text](/home/pavan/Developer/portfolio/public/images/Screenshot from 2025-06-10 21-15-04.png)
+
+
 ## 🚀 Features
 
 - Modern and clean design
