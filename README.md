@@ -2,6 +2,10 @@
 
 A modern, responsive portfolio website built with Next.js, TypeScript, and Tailwind CSS.
 
+![alt text](Portfolio.png)
+
+
+
 ## Features
 
 - 🌓 Dark/Light mode support
