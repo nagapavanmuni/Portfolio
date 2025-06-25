@@ -1,57 +1,3 @@
-<<<<<<< HEAD
-import { Card } from "@/components/ui/card"
-import SmoothScrollSection from "./smooth-scroll-section"
-
-const technologies = [
-  {
-    category: "Frontend",
-    skills: ["React", "Next.js", "TypeScript", "TailwindCSS", "Redux", "GraphQL"],
-  },
-  {
-    category: "Backend",
-    skills: ["Node.js", "Express", "Python", "Django", "PostgreSQL", "MongoDB"],
-  },
-  {
-    category: "DevOps",
-    skills: ["Docker", "Git", "Linux"],
-  },
-  {
-    category: "Tools",
-    skills: ["VS Code", "Postman", "Figma", "Jest", "GitHub", "Vercel"],
-  },
-]
-
-export default function TechStack() {
-  return (
-    <div className="grid gap-10 md:grid-cols-2">
-      {technologies.map((tech, index) => (
-        <SmoothScrollSection key={tech.category} animationType="scale" delay={index * 200}>
-          <Card className="p-8 group hover:shadow-2xl transition-all duration-700 border-gray-200/30 dark:border-gray-700/30 bg-white/60 dark:bg-gray-800/60 backdrop-blur-lg hover:scale-105 hover:-rotate-1 hover:bg-white/80 dark:hover:bg-gray-800/80">
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-50/40 via-transparent to-purple-50/40 dark:from-blue-950/30 dark:to-purple-950/30 opacity-0 group-hover:opacity-100 transition-all duration-700 rounded-lg" />
-
-            <div className="relative z-10">
-              <h3 className="text-lg font-semibold mb-6 text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-all duration-500 group-hover:scale-105">
-                {tech.category}
-              </h3>
-              <div className="flex flex-wrap gap-3">
-                {tech.skills.map((skill, skillIndex) => (
-                  <span
-                    key={skill}
-                    className="inline-flex items-center rounded-lg bg-gradient-to-r from-blue-50/80 to-purple-50/80 dark:from-blue-900/30 dark:to-purple-900/30 px-3 py-2 text-sm font-medium text-blue-700 dark:text-blue-300 ring-1 ring-blue-200/50 dark:ring-blue-700/50 hover:from-purple-50/80 hover:to-pink-50/80 dark:hover:from-purple-800/30 dark:hover:to-pink-800/30 hover:text-purple-700 dark:hover:text-purple-300 transition-all duration-500 hover:scale-110 hover:rotate-3 hover:shadow-lg cursor-default"
-                    style={{
-                      animationDelay: `${skillIndex * 100}ms`,
-                      transitionDelay: `${skillIndex * 50}ms`,
-                    }}
-                  >
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </Card>
-        </SmoothScrollSection>
-      ))}
-=======
 "use client"
 
 import { useState } from "react"
@@ -60,6 +6,7 @@ import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Code, Layout, Server, Terminal, Wrench, Sparkles } from "lucide-react"
 import SmoothScrollSection from "./smooth-scroll-section"
+import { useTheme } from "next-themes"
 
 const technologies = {
   frontend: [
@@ -113,18 +60,71 @@ const categoryIcons = {
   tools: <Wrench className="h-5 w-5" />,
 }
 
-const levelColors = {
-  Advanced:
-    "bg-gradient-to-r from-blue-500 to-purple-500 text-white border-transparent hover:from-blue-600 hover:to-purple-600",
-  Intermediate:
-    "bg-gradient-to-r from-cyan-500 to-blue-500 text-white border-transparent hover:from-cyan-600 hover:to-blue-600",
-  Beginner:
-    "bg-gradient-to-r from-green-500 to-teal-500 text-white border-transparent hover:from-green-600 hover:to-teal-600",
-}
-
 export default function TechStack() {
   const [activeTab, setActiveTab] = useState("frontend")
   const [hoveredSkill, setHoveredSkill] = useState<string | null>(null)
+  const { resolvedTheme } = useTheme()
+
+  const getLevelColors = (level: string) => {
+    const baseColors = {
+      Advanced: {
+        light:
+          "bg-gradient-to-r from-blue-500 to-purple-500 text-white border-transparent hover:from-blue-600 hover:to-purple-600",
+        dark: "bg-gradient-to-r from-blue-400 to-purple-400 text-gray-900 border-transparent hover:from-blue-300 hover:to-purple-300",
+      },
+      Intermediate: {
+        light:
+          "bg-gradient-to-r from-cyan-500 to-blue-500 text-white border-transparent hover:from-cyan-600 hover:to-blue-600",
+        dark: "bg-gradient-to-r from-cyan-400 to-blue-400 text-gray-900 border-transparent hover:from-cyan-300 hover:to-blue-300",
+      },
+      Beginner: {
+        light:
+          "bg-gradient-to-r from-green-500 to-teal-500 text-white border-transparent hover:from-green-600 hover:to-teal-600",
+        dark: "bg-gradient-to-r from-green-400 to-teal-400 text-gray-900 border-transparent hover:from-green-300 hover:to-teal-300",
+      },
+    }
+
+    return resolvedTheme === "dark"
+      ? baseColors[level as keyof typeof baseColors]?.dark
+      : baseColors[level as keyof typeof baseColors]?.light
+  }
+
+  const getTabClasses = (category: string) => {
+    const isActive = activeTab === category
+    if (resolvedTheme === "dark") {
+      return `flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-300 ${
+        isActive
+          ? "bg-gray-800 text-blue-400 shadow-lg"
+          : "bg-gray-800/50 text-gray-400 hover:bg-gray-800/80 hover:text-blue-400"
+      }`
+    }
+    return `flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-300 ${
+      isActive
+        ? "bg-white text-blue-600 shadow-lg"
+        : "bg-gray-100/50 text-gray-600 hover:bg-gray-100 hover:text-blue-600"
+    }`
+  }
+
+  const getCardClasses = () => {
+    if (resolvedTheme === "dark") {
+      return "bg-gray-800/80 border-gray-700/50"
+    }
+    return "bg-white/80 border-gray-200/50"
+  }
+
+  const getOverviewClasses = () => {
+    if (resolvedTheme === "dark") {
+      return "bg-gradient-to-r from-blue-900/20 to-purple-900/20"
+    }
+    return "bg-gradient-to-r from-blue-50 to-purple-50"
+  }
+
+  const getOverviewCardClasses = () => {
+    if (resolvedTheme === "dark") {
+      return "bg-gray-800/80"
+    }
+    return "bg-white/80"
+  }
 
   return (
     <div className="space-y-6">
@@ -132,15 +132,7 @@ export default function TechStack() {
         <div className="flex justify-center mb-6">
           <TabsList className="grid grid-cols-2 md:grid-cols-4 gap-2 bg-transparent">
             {Object.entries(categoryIcons).map(([category, icon]) => (
-              <TabsTrigger
-                key={category}
-                value={category}
-                className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-300 data-[state=active]:bg-white dark:data-[state=active]:bg-gray-800 data-[state=active]:shadow-lg ${
-                  activeTab === category
-                    ? "bg-white dark:bg-gray-800 text-blue-600 dark:text-blue-400 shadow-lg"
-                    : "bg-gray-100/50 dark:bg-gray-800/50 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800/80"
-                }`}
-              >
+              <TabsTrigger key={category} value={category} className={getTabClasses(category)}>
                 {icon}
                 <span className="capitalize">{category}</span>
               </TabsTrigger>
@@ -150,18 +142,30 @@ export default function TechStack() {
 
         {Object.entries(technologies).map(([category, skills]) => (
           <TabsContent key={category} value={category} className="mt-0 focus-visible:outline-none focus-visible:ring-0">
-            <Card className="p-6 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-gray-200/50 dark:border-gray-700/50 shadow-lg hover:shadow-xl transition-all duration-500">
+            <Card
+              className={`p-6 ${getCardClasses()} backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-500`}
+            >
               <div className="relative">
                 {/* Background pattern */}
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-50/30 via-transparent to-purple-50/30 dark:from-blue-900/10 dark:to-purple-900/10 rounded-lg" />
+                <div
+                  className={`absolute inset-0 ${
+                    resolvedTheme === "dark"
+                      ? "bg-gradient-to-br from-blue-900/10 to-purple-900/10"
+                      : "bg-gradient-to-br from-blue-50/30 via-transparent to-purple-50/30"
+                  } rounded-lg`}
+                />
 
                 {/* Category description */}
                 <div className="relative mb-6">
-                  <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white flex items-center gap-2">
+                  <h3
+                    className={`text-xl font-semibold mb-2 flex items-center gap-2 ${
+                      resolvedTheme === "dark" ? "text-white" : "text-gray-900"
+                    }`}
+                  >
                     {categoryIcons[category as keyof typeof categoryIcons]}
                     <span className="capitalize">{category} Skills</span>
                   </h3>
-                  <p className="text-gray-600 dark:text-gray-300 text-sm">
+                  <p className={`text-sm ${resolvedTheme === "dark" ? "text-gray-300" : "text-gray-600"}`}>
                     {category === "frontend" && "Building responsive, accessible, and performant user interfaces."}
                     {category === "backend" && "Developing robust server-side applications and APIs."}
                     {category === "devops" && "Streamlining development operations and deployment processes."}
@@ -171,10 +175,13 @@ export default function TechStack() {
 
                 {/* Skills grid with categories */}
                 <div className="space-y-6">
-                  {/* Group skills by category */}
                   {Array.from(new Set(skills.map((skill) => skill.category))).map((skillCategory) => (
                     <div key={skillCategory} className="space-y-3">
-                      <h4 className="text-sm font-medium text-gray-500 dark:text-gray-400 flex items-center gap-2">
+                      <h4
+                        className={`text-sm font-medium flex items-center gap-2 ${
+                          resolvedTheme === "dark" ? "text-gray-400" : "text-gray-500"
+                        }`}
+                      >
                         <Code className="h-4 w-4" />
                         {skillCategory}
                       </h4>
@@ -186,7 +193,7 @@ export default function TechStack() {
                               key={skill.name}
                               className={`text-xs py-1.5 px-3 rounded-md transition-all duration-500 cursor-default relative group ${
                                 hoveredSkill === skill.name ? "scale-110 shadow-md" : ""
-                              } ${levelColors[skill.level as keyof typeof levelColors] || "bg-gray-100 dark:bg-gray-800"}`}
+                              } ${getLevelColors(skill.level) || (resolvedTheme === "dark" ? "bg-gray-800" : "bg-gray-100")}`}
                               onMouseEnter={() => setHoveredSkill(skill.name)}
                               onMouseLeave={() => setHoveredSkill(null)}
                             >
@@ -200,16 +207,26 @@ export default function TechStack() {
                                 <span
                                   className={`relative inline-flex rounded-full h-3 w-3 ${
                                     skill.level === "Advanced"
-                                      ? "bg-purple-400"
+                                      ? resolvedTheme === "dark"
+                                        ? "bg-purple-300"
+                                        : "bg-purple-400"
                                       : skill.level === "Intermediate"
-                                        ? "bg-blue-400"
-                                        : "bg-green-400"
+                                        ? resolvedTheme === "dark"
+                                          ? "bg-blue-300"
+                                          : "bg-blue-400"
+                                        : resolvedTheme === "dark"
+                                          ? "bg-green-300"
+                                          : "bg-green-400"
                                   }`}
                                 ></span>
                               </span>
 
                               {/* Tooltip */}
-                              <span className="absolute -top-10 left-1/2 transform -translate-x-1/2 px-2 py-1 bg-gray-900 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap z-20">
+                              <span
+                                className={`absolute -top-10 left-1/2 transform -translate-x-1/2 px-2 py-1 text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap z-20 ${
+                                  resolvedTheme === "dark" ? "bg-gray-900 text-white" : "bg-gray-900 text-white"
+                                }`}
+                              >
                                 {skill.level}
                               </span>
                             </Badge>
@@ -220,18 +237,40 @@ export default function TechStack() {
                 </div>
 
                 {/* Skill level legend */}
-                <div className="mt-8 pt-4 border-t border-gray-200/50 dark:border-gray-700/50 flex flex-wrap gap-4 justify-center">
+                <div
+                  className={`mt-8 pt-4 border-t flex flex-wrap gap-4 justify-center ${
+                    resolvedTheme === "dark" ? "border-gray-700/50" : "border-gray-200/50"
+                  }`}
+                >
                   <div className="flex items-center gap-2">
-                    <span className="inline-block h-3 w-3 rounded-full bg-purple-400"></span>
-                    <span className="text-xs text-gray-600 dark:text-gray-400">Advanced</span>
+                    <span
+                      className={`inline-block h-3 w-3 rounded-full ${
+                        resolvedTheme === "dark" ? "bg-purple-300" : "bg-purple-400"
+                      }`}
+                    ></span>
+                    <span className={`text-xs ${resolvedTheme === "dark" ? "text-gray-400" : "text-gray-600"}`}>
+                      Advanced
+                    </span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="inline-block h-3 w-3 rounded-full bg-blue-400"></span>
-                    <span className="text-xs text-gray-600 dark:text-gray-400">Intermediate</span>
+                    <span
+                      className={`inline-block h-3 w-3 rounded-full ${
+                        resolvedTheme === "dark" ? "bg-blue-300" : "bg-blue-400"
+                      }`}
+                    ></span>
+                    <span className={`text-xs ${resolvedTheme === "dark" ? "text-gray-400" : "text-gray-600"}`}>
+                      Intermediate
+                    </span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="inline-block h-3 w-3 rounded-full bg-green-400"></span>
-                    <span className="text-xs text-gray-600 dark:text-gray-400">Beginner</span>
+                    <span
+                      className={`inline-block h-3 w-3 rounded-full ${
+                        resolvedTheme === "dark" ? "bg-green-300" : "bg-green-400"
+                      }`}
+                    ></span>
+                    <span className={`text-xs ${resolvedTheme === "dark" ? "text-gray-400" : "text-gray-600"}`}>
+                      Beginner
+                    </span>
                   </div>
                 </div>
               </div>
@@ -242,59 +281,91 @@ export default function TechStack() {
 
       {/* Skills overview */}
       <SmoothScrollSection animationType="fadeIn" delay={500}>
-        <div className="mt-8 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-xl p-6 shadow-inner">
+        <div className={`mt-8 ${getOverviewClasses()} rounded-xl p-6 shadow-inner`}>
           <div className="flex items-center gap-2 mb-4">
-            <Sparkles className="h-5 w-5 text-blue-500" />
-            <h3 className="text-lg font-medium text-gray-900 dark:text-white">Skills Overview</h3>
+            <Sparkles className={`h-5 w-5 ${resolvedTheme === "dark" ? "text-blue-400" : "text-blue-500"}`} />
+            <h3 className={`text-lg font-medium ${resolvedTheme === "dark" ? "text-white" : "text-gray-900"}`}>
+              Skills Overview
+            </h3>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="bg-white/80 dark:bg-gray-800/80 rounded-lg p-4 shadow-sm">
-              <h4 className="font-medium text-blue-600 dark:text-blue-400 mb-2">Core Strengths</h4>
-              <ul className="text-sm text-gray-600 dark:text-gray-300 space-y-1">
+            <div className={`${getOverviewCardClasses()} rounded-lg p-4 shadow-sm`}>
+              <h4 className={`font-medium mb-2 ${resolvedTheme === "dark" ? "text-blue-400" : "text-blue-600"}`}>
+                Core Strengths
+              </h4>
+              <ul className={`text-sm space-y-1 ${resolvedTheme === "dark" ? "text-gray-300" : "text-gray-600"}`}>
                 <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-blue-500"></span>
+                  <span
+                    className={`h-1.5 w-1.5 rounded-full ${resolvedTheme === "dark" ? "bg-blue-400" : "bg-blue-500"}`}
+                  ></span>
                   Full-stack JavaScript development
                 </li>
                 <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-blue-500"></span>
+                  <span
+                    className={`h-1.5 w-1.5 rounded-full ${resolvedTheme === "dark" ? "bg-blue-400" : "bg-blue-500"}`}
+                  ></span>
                   React & Next.js applications
                 </li>
                 <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-blue-500"></span>
+                  <span
+                    className={`h-1.5 w-1.5 rounded-full ${resolvedTheme === "dark" ? "bg-blue-400" : "bg-blue-500"}`}
+                  ></span>
                   Responsive UI/UX design
                 </li>
               </ul>
             </div>
-            <div className="bg-white/80 dark:bg-gray-800/80 rounded-lg p-4 shadow-sm">
-              <h4 className="font-medium text-purple-600 dark:text-purple-400 mb-2">Currently Learning</h4>
-              <ul className="text-sm text-gray-600 dark:text-gray-300 space-y-1">
+            <div className={`${getOverviewCardClasses()} rounded-lg p-4 shadow-sm`}>
+              <h4 className={`font-medium mb-2 ${resolvedTheme === "dark" ? "text-purple-400" : "text-purple-600"}`}>
+                Currently Learning
+              </h4>
+              <ul className={`text-sm space-y-1 ${resolvedTheme === "dark" ? "text-gray-300" : "text-gray-600"}`}>
                 <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-purple-500"></span>
+                  <span
+                    className={`h-1.5 w-1.5 rounded-full ${
+                      resolvedTheme === "dark" ? "bg-purple-400" : "bg-purple-500"
+                    }`}
+                  ></span>
                   AI/ML integration
                 </li>
                 <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-purple-500"></span>
+                  <span
+                    className={`h-1.5 w-1.5 rounded-full ${
+                      resolvedTheme === "dark" ? "bg-purple-400" : "bg-purple-500"
+                    }`}
+                  ></span>
                   Kubernetes orchestration
                 </li>
                 <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-purple-500"></span>
+                  <span
+                    className={`h-1.5 w-1.5 rounded-full ${
+                      resolvedTheme === "dark" ? "bg-purple-400" : "bg-purple-500"
+                    }`}
+                  ></span>
                   Web3 development
                 </li>
               </ul>
             </div>
-            <div className="bg-white/80 dark:bg-gray-800/80 rounded-lg p-4 shadow-sm">
-              <h4 className="font-medium text-green-600 dark:text-green-400 mb-2">Soft Skills</h4>
-              <ul className="text-sm text-gray-600 dark:text-gray-300 space-y-1">
+            <div className={`${getOverviewCardClasses()} rounded-lg p-4 shadow-sm`}>
+              <h4 className={`font-medium mb-2 ${resolvedTheme === "dark" ? "text-green-400" : "text-green-600"}`}>
+                Soft Skills
+              </h4>
+              <ul className={`text-sm space-y-1 ${resolvedTheme === "dark" ? "text-gray-300" : "text-gray-600"}`}>
                 <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-green-500"></span>
+                  <span
+                    className={`h-1.5 w-1.5 rounded-full ${resolvedTheme === "dark" ? "bg-green-400" : "bg-green-500"}`}
+                  ></span>
                   Team collaboration
                 </li>
                 <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-green-500"></span>
+                  <span
+                    className={`h-1.5 w-1.5 rounded-full ${resolvedTheme === "dark" ? "bg-green-400" : "bg-green-500"}`}
+                  ></span>
                   Problem-solving
                 </li>
                 <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-green-500"></span>
+                  <span
+                    className={`h-1.5 w-1.5 rounded-full ${resolvedTheme === "dark" ? "bg-green-400" : "bg-green-500"}`}
+                  ></span>
                   Technical communication
                 </li>
               </ul>
@@ -302,7 +373,6 @@ export default function TechStack() {
           </div>
         </div>
       </SmoothScrollSection>
->>>>>>> f85d32de63cf560b3a18dcf7cd069e6b9af11838
     </div>
   )
 }

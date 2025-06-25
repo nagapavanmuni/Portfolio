@@ -5,7 +5,7 @@ import { Github, Linkedin, Mail, Twitter } from "lucide-react"
 
 export default function AboutPage() {
   return (
-    <UnifiedLayout>
+    <UnifiedLayout showBackNav={true} backNavVariant="arrow">
       <div className="min-h-screen py-16 md:py-20 lg:py-24">
         <SmoothScrollSection animationType="fadeIn" className="container px-4 md:px-6">
           <div className="flex flex-col items-center justify-center space-y-6 text-center">

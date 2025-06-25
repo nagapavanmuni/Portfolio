@@ -4,7 +4,7 @@ import UnifiedLayout from "../components/unified-layout"
 
 export default function ContactPage() {
   return (
-    <UnifiedLayout>
+    <UnifiedLayout showBackNav={true} backNavVariant="arrow">
       <div className="min-h-screen py-16 md:py-20 lg:py-24">
         <div className="container px-4 md:px-6">
           <div className="mx-auto max-w-2xl">

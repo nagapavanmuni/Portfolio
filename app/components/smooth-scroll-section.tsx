@@ -38,11 +38,7 @@ export default function SmoothScrollSection({
       },
       {
         threshold: 0.1,
-<<<<<<< HEAD
-        rootMargin: "100px 0px -50px 0px",
-=======
         rootMargin: "50px 0px -10px 0px", // Reduced bottom margin to trigger animations sooner
->>>>>>> f85d32de63cf560b3a18dcf7cd069e6b9af11838
       },
     )
 
@@ -66,19 +62,11 @@ export default function SmoothScrollSection({
         case "fadeIn":
           return `${baseClasses} opacity-0`
         case "slideUp":
-<<<<<<< HEAD
-          return `${baseClasses} opacity-0 translate-y-12`
-        case "slideLeft":
-          return `${baseClasses} opacity-0 translate-x-12`
-        case "slideRight":
-          return `${baseClasses} opacity-0 -translate-x-12`
-=======
           return `${baseClasses} opacity-0 translate-y-8` // Reduced distance
         case "slideLeft":
           return `${baseClasses} opacity-0 translate-x-8` // Reduced distance
         case "slideRight":
           return `${baseClasses} opacity-0 -translate-x-8` // Reduced distance
->>>>>>> f85d32de63cf560b3a18dcf7cd069e6b9af11838
         case "scale":
           return `${baseClasses} opacity-0 scale-95`
         case "rotate":

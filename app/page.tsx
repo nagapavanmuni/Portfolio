@@ -1,140 +1,22 @@
-<<<<<<< HEAD
-import { Button } from "@/components/ui/button"
-import { Github, Linkedin, Mail, Twitter } from "lucide-react"
-import Link from "next/link"
-import ContactForm from "./components/contact-form"
-import TechStack from "./components/tech-stack"
-import ExperienceSection from "./components/experience-section"
-import SmoothScrollSection from "./components/smooth-scroll-section"
-import GestureScrollHandler from "./components/gesture-scroll-handler"
-import NavigationHeader from "./components/navigation-header"
-import SectionNavigation from "./components/section-navigation"
-import ProjectsSection from "./components/projects-section"
-import DynamicBackground from "./components/dynamic-background"
-
-export default function Page() {
-  return (
-    <div className="min-h-screen bg-white dark:bg-gray-900 relative overflow-hidden">
-      <DynamicBackground />
-      <GestureScrollHandler />
-      <NavigationHeader />
-      <SectionNavigation />
-
-      <main className="container px-4 md:px-6 relative z-10">
-        <SmoothScrollSection id="about" animationType="fadeIn" className="py-20 md:py-28 lg:py-36">
-          <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center justify-center space-y-8 text-center">
-              <SmoothScrollSection animationType="scale" delay={200}>
-                <div className="space-y-6">
-                  <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl bg-gradient-to-r from-gray-900 via-blue-800 to-purple-800 dark:from-white dark:via-blue-200 dark:to-purple-200 bg-clip-text text-transparent animate-gradient-x">
-                    Full Stack Developer
-                  </h1>
-                  <p className="mx-auto max-w-[700px] text-gray-600 dark:text-gray-300 md:text-xl leading-relaxed">
-                    Building digital experiences with modern technologies. Focused on creating elegant solutions to
-                    complex problems with a passion for clean, efficient code.
-                  </p>
-                </div>
-              </SmoothScrollSection>
-
-              <SmoothScrollSection animationType="slideUp" delay={400}>
-                <div className="flex space-x-4">
-                  {[
-                    { href: "https://github.com/nagapavanmuni", icon: Github, label: "GitHub" },
-                    { href: "https://www.linkedin.com/in/nagapavanmuni/", icon: Linkedin, label: "LinkedIn" },
-                    { href: "https://x.com/pavxnreddy16", icon: Twitter, label: "Twitter" },
-                    { href: "mailto:hello@example.com", icon: Mail, label: "Email" },
-                  ].map(({ href, icon: Icon, label }, index) => (
-                    <Link key={label} href={href} target="_blank">
-                      <Button
-                        variant="outline"
-                        size="icon"
-                        className="hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all duration-500 hover:scale-125 hover:rotate-12 hover:shadow-lg group"
-                        style={{ animationDelay: `${index * 100}ms` }}
-                      >
-                        <Icon className="h-4 w-4 group-hover:scale-110 transition-transform duration-300" />
-                        <span className="sr-only">{label}</span>
-                      </Button>
-                    </Link>
-                  ))}
-                </div>
-              </SmoothScrollSection>
-            </div>
-          </div>
-        </SmoothScrollSection>
-
-        <SmoothScrollSection id="experience" animationType="slideUp" className="py-20 md:py-28 lg:py-36">
-          <div className="container px-4 md:px-6">
-            <SmoothScrollSection animationType="blur" delay={100}>
-              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl mb-20 text-center bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-300 bg-clip-text text-transparent">
-                Experience
-              </h2>
-            </SmoothScrollSection>
-            <SmoothScrollSection animationType="slideLeft" delay={300}>
-              <ExperienceSection />
-            </SmoothScrollSection>
-          </div>
-        </SmoothScrollSection>
-
-        <ProjectsSection />
-
-        <SmoothScrollSection animationType="slideRight" className="py-20 md:py-28 lg:py-36">
-          <div className="container px-4 md:px-6">
-            <SmoothScrollSection animationType="blur" delay={100}>
-              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl mb-20 text-center bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-300 bg-clip-text text-transparent">
-                Tech Stack
-              </h2>
-            </SmoothScrollSection>
-            <SmoothScrollSection animationType="slideUp" delay={300}>
-              <TechStack />
-            </SmoothScrollSection>
-          </div>
-        </SmoothScrollSection>
-
-        <SmoothScrollSection id="contact" animationType="slideUp" className="py-20 md:py-28 lg:py-36">
-          <div className="container px-4 md:px-6">
-            <div className="mx-auto max-w-2xl">
-              <SmoothScrollSection animationType="blur" delay={100}>
-                <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl mb-20 text-center bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-300 bg-clip-text text-transparent">
-                  Get in Touch
-                </h2>
-              </SmoothScrollSection>
-              <SmoothScrollSection animationType="scale" delay={300}>
-                <ContactForm />
-              </SmoothScrollSection>
-            </div>
-          </div>
-        </SmoothScrollSection>
-      </main>
-
-      <footer className="border-t border-gray-200/30 dark:border-gray-700/30 relative z-10 bg-white/50 dark:bg-gray-900/50 backdrop-blur-sm">
-        <SmoothScrollSection animationType="fadeIn">
-          <div className="container flex flex-col gap-2 sm:flex-row py-8 w-full shrink-0 items-center px-4 md:px-6">
-            <p className="text-xs text-gray-500 dark:text-gray-400">© 2024 Naga Pavan Muni. All rights reserved.</p>
-            <nav className="sm:ml-auto flex gap-4 sm:gap-6">
-              {["Terms of Service", "Privacy"].map((item) => (
-                <Link
-                  key={item}
-                  className="text-xs hover:underline underline-offset-4 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-all duration-300 hover:scale-105"
-                  href="#"
-                >
-                  {item}
-                </Link>
-              ))}
-            </nav>
-          </div>
-        </SmoothScrollSection>
-      </footer>
-    </div>
-=======
 "use client"
 
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { motion } from "framer-motion"
 import UnifiedLayout from "./components/unified-layout"
-import { ArrowRight, User, Briefcase, Code, Wrench, Mail } from "lucide-react"
+import DynamicLiveText from "./components/dynamic-live-text"
+import { ArrowRight, User, Briefcase, Code, Wrench, Mail, Sparkles } from "lucide-react"
 
 export default function Page() {
+  const liveTexts = [
+    "Full Stack Developer",
+    "React & Next.js Expert",
+    "UI/UX Enthusiast",
+    "Problem Solver",
+    "Code Architect",
+    "Digital Creator",
+  ]
+
   const sections = [
     {
       id: "about",
@@ -189,7 +71,7 @@ export default function Page() {
   ]
 
   return (
-    <UnifiedLayout showSectionNav={false}>
+    <UnifiedLayout showSectionNav={false} showBackNav={false}>
       <div className="container px-4 md:px-6 py-16 md:py-24 lg:py-32">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -197,13 +79,73 @@ export default function Page() {
           transition={{ duration: 0.8 }}
           className="flex flex-col items-center justify-center space-y-8 text-center mb-16"
         >
-          <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl bg-gradient-to-r from-teal-500 via-blue-500 to-purple-500 dark:from-teal-300 dark:via-blue-300 dark:to-purple-300 bg-clip-text text-transparent animate-gradient-x">
-            Naga Pavan Muni
-          </h1>
-          <p className="mx-auto max-w-[700px] text-gray-600 dark:text-gray-300 md:text-xl leading-relaxed">
-            Full Stack Developer specializing in modern web technologies and creating elegant solutions to complex
-            problems.
-          </p>
+          {/* Main Name with enhanced styling */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, delay: 0.2 }}
+            className="relative"
+          >
+            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl bg-gradient-to-r from-teal-500 via-blue-500 to-purple-500 dark:from-teal-300 dark:via-blue-300 dark:to-purple-300 bg-clip-text text-transparent animate-gradient-x">
+              Naga Pavan Muni
+            </h1>
+
+            {/* Sparkle effects */}
+            <motion.div
+              className="absolute -top-4 -right-4"
+              animate={{
+                rotate: [0, 360],
+                scale: [1, 1.2, 1],
+              }}
+              transition={{
+                duration: 3,
+                repeat: Number.POSITIVE_INFINITY,
+                repeatType: "reverse",
+              }}
+            >
+              <Sparkles className="h-6 w-6 text-purple-400" />
+            </motion.div>
+            <motion.div
+              className="absolute -bottom-2 -left-4"
+              animate={{
+                rotate: [360, 0],
+                scale: [1, 1.1, 1],
+              }}
+              transition={{
+                duration: 4,
+                repeat: Number.POSITIVE_INFINITY,
+                repeatType: "reverse",
+                delay: 1,
+              }}
+            >
+              <Sparkles className="h-4 w-4 text-teal-400" />
+            </motion.div>
+          </motion.div>
+
+          {/* Dynamic Live Text */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+            className="h-16 flex items-center justify-center"
+          >
+            <DynamicLiveText
+              texts={liveTexts}
+              className="text-2xl md:text-3xl lg:text-4xl"
+              speed={80}
+              pauseDuration={2500}
+            />
+          </motion.div>
+
+          {/* Description */}
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
+            className="mx-auto max-w-[700px] text-gray-600 dark:text-gray-300 md:text-xl leading-relaxed"
+          >
+            Specializing in modern web technologies and creating elegant solutions to complex problems.
+          </motion.p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -212,30 +154,41 @@ export default function Page() {
               key={section.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              transition={{ duration: 0.5, delay: 1.2 + index * 0.1 }}
             >
               <Link href={`/${section.id}`} className="block h-full">
                 <div
-                  className={`h-full group p-6 rounded-xl bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50 shadow-lg hover:shadow-xl transition-all duration-500 hover:scale-[1.02] ${section.hoverColor}`}
+                  className={`h-full group p-6 rounded-xl bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50 shadow-lg hover:shadow-xl transition-all duration-500 hover:scale-[1.02] ${section.hoverColor} relative overflow-hidden`}
                 >
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className={`p-3 rounded-lg bg-gradient-to-br ${section.color} text-white`}>
-                      <section.icon className="h-6 w-6" />
+                  {/* Animated background gradient */}
+                  <div
+                    className={`absolute inset-0 bg-gradient-to-br ${section.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500`}
+                  />
+
+                  <div className="relative z-10">
+                    <div className="flex items-center gap-4 mb-4">
+                      <motion.div
+                        className={`p-3 rounded-lg bg-gradient-to-br ${section.color} text-white`}
+                        whileHover={{ rotate: 5, scale: 1.1 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <section.icon className="h-6 w-6" />
+                      </motion.div>
+                      <h2
+                        className={`text-2xl font-semibold ${section.textColor} group-hover:scale-105 transition-transform duration-300`}
+                      >
+                        {section.title}
+                      </h2>
                     </div>
-                    <h2
-                      className={`text-2xl font-semibold ${section.textColor} group-hover:scale-105 transition-transform duration-300`}
-                    >
-                      {section.title}
-                    </h2>
-                  </div>
-                  <p className="text-gray-600 dark:text-gray-300 mb-6">{section.description}</p>
-                  <div className="flex justify-end">
-                    <Button
-                      variant="ghost"
-                      className={`${section.textColor} ${section.hoverColor} group-hover:translate-x-1 transition-transform duration-300`}
-                    >
-                      Explore <ArrowRight className="ml-2 h-4 w-4" />
-                    </Button>
+                    <p className="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">{section.description}</p>
+                    <div className="flex justify-end">
+                      <Button
+                        variant="ghost"
+                        className={`${section.textColor} ${section.hoverColor} group-hover:translate-x-1 transition-transform duration-300`}
+                      >
+                        Explore <ArrowRight className="ml-2 h-4 w-4" />
+                      </Button>
+                    </div>
                   </div>
                 </div>
               </Link>
@@ -244,6 +197,5 @@ export default function Page() {
         </div>
       </div>
     </UnifiedLayout>
->>>>>>> f85d32de63cf560b3a18dcf7cd069e6b9af11838
   )
 }
